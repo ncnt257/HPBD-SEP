@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="favicon_io/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <title>SẾP HUY, HAPPY BIRTHDAY, SUPERHERO! ⚡</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+
+        body, p {
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        h1 {
+            font-family: 'Bangers', cursive;
+        }
+    
+        body {
+            background: linear-gradient(-45deg, #0a1f44, #cc0000, #1a3c7d, #e6b800);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+    
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .comic-burst {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .burst {
+            position: absolute;
+            background: rgba(230, 184, 0, 0.1);
+            border-radius: 50%;
+            transform: rotate(45deg);
+        }
+    
+        .header {
+            margin: 20px 0;
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+    
+        h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(45deg, #e6b800, #cc0000);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 3px 3px 0px rgba(0,0,0,0.3);
+            margin: 20px 0;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            animation: pulse 2s infinite;
+        }
+    
+        .photo-frame {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 
+                        0 0 20px rgba(230, 184, 0, 0.5);
+            text-align: center;
+            transition: all 0.3s ease;
+            margin: 30px 0;
+            border: 5px solid #cc0000;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+    
+        .photo-frame:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            box-shadow: 0 15px 40px rgba(230, 184, 0, 0.4),
+                        0 0 30px rgba(204, 0, 0, 0.3);
+            border-color: #e6b800;
+        }
+    
+        .photo-frame img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+        }
+    
+        .photo-frame:hover img {
+            transform: scale(1.05);
+        }
+    
+        .photo-frame p {
+            margin-top: 15px;
+            font-size: 1.2rem;
+            color: #0a1f44;
+            font-weight: bold;
+            text-shadow: 1px 1px 0px rgba(255,255,255,0.5);
+        }
+    
+        .super-button {
+            padding: 20px 40px;
+            font-size: 1.4rem;
+            margin: 20px;
+            cursor: pointer;
+            background: linear-gradient(45deg, #cc0000, #e6b800);
+            border: none;
+            border-radius: 50px;
+            color: #ffffff;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(204, 0, 0, 0.4),
+                        0 0 20px rgba(230, 184, 0, 0.3);
+            position: relative;
+            font-weight: bold;
+            text-transform: uppercase;
+            overflow: hidden;
+        }
+    
+        .super-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(204, 0, 0, 0.6),
+                        0 0 30px rgba(230, 184, 0, 0.5);
+            animation: shake 0.5s ease-in-out;
+        }
+
+        .super-button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255,255,255,0.1);
+            transform: rotate(45deg);
+            transition: all 0.3s ease;
+        }
+
+        .super-button:hover::before {
+            transform: rotate(45deg) translateY(-50%);
+        }
+    
+		.message-box {
+			background: rgba(255, 255, 255, 0.95);
+			border-radius: 20px;
+			padding: 30px;
+			margin: 30px 0;
+			text-align: center;
+			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3),
+						0 0 20px rgba(230, 184, 0, 0.3);
+			font-size: 1.2rem;
+			font-weight: bold;
+			color: #0a1f44;
+			border: 5px solid #cc0000;
+			transform-style: preserve-3d;
+			transition: all 0.3s ease;
+			position: relative;
+			min-height: 400px;
+		}
+
+		.message-box .image-container {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			gap: 20px;
+			margin: 20px 0;
+		}
+
+		.message-box .hero-image {
+			width: 150px;
+			height: 150px;
+			object-fit: contain;
+			transition: all 0.3s ease;
+		}
+
+		.message-box .hero-image:nth-child(1) {
+			transform: rotate(-5deg) translateY(-10px);
+			animation: float 3s ease-in-out infinite;
+		}
+
+		.message-box .hero-image:nth-child(2) {
+			transform: rotate(5deg) translateY(10px);
+			animation: float 3s ease-in-out infinite 0.5s;
+		}
+
+		.message-box .hero-image:nth-child(3) {
+			transform: scale(1.2);
+			animation: float 3s ease-in-out infinite 1s;
+		}
+
+		.message-box .hero-image:nth-child(4) {
+			transform: rotate(-7deg) translateY(5px);
+			animation: float 3s ease-in-out infinite 1.5s;
+		}
+
+		.message-box .hero-image:nth-child(5) {
+			transform: rotate(7deg) translateY(-5px);
+			animation: float 3s ease-in-out infinite 2s;
+		}
+
+		.message-box .hero-image:hover {
+			transform: scale(1.2) rotate(0deg);
+			z-index: 2;
+		}
+
+		@keyframes float {
+			0%, 100% { transform: translateY(0) rotate(var(--rotation, 0deg)); }
+			50% { transform: translateY(-15px) rotate(var(--rotation, 0deg)); }
+		}
+
+		/* Responsive adjustments */
+		@media (max-width: 768px) {
+			.message-box .hero-image {
+				width: 120px;
+				height: 120px;
+			}
+			
+			.message-box {
+				min-height: 300px;
+			}
+		}
+    
+        .flying-superman {
+            font-size: 5em;
+            margin: 20px 0;
+            animation: fly 3s infinite;
+            display: inline-block;
+            text-shadow: 0 0 20px rgba(230, 184, 0, 0.5);
+        }
+    
+        @keyframes fly {
+            0% { transform: translateY(0) rotate(0deg) scale(1); }
+            50% { transform: translateY(-30px) rotate(10deg) scale(1.1); }
+            100% { transform: translateY(0) rotate(0deg) scale(1); }
+        }
+
+        .lightning-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .lightning {
+            position: absolute;
+            font-size: 30px;
+            filter: drop-shadow(0 0 10px rgba(230, 184, 0, 0.5));
+            animation: lightningFloat 2s linear infinite;
+        }
+
+        @keyframes lightningFloat {
+            0% { transform: translateY(100vh) rotate(0deg) scale(0.5); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg) scale(1.5); opacity: 0; }
+        }
+
+        .super-footer {
+            margin-top: 40px;
+            font-size: 2.5em;
+            background: linear-gradient(45deg, #e6b800, #cc0000);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: bold;
+            text-shadow: 2px 2px 0px rgba(0,0,0,0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+    
+	
+            .photo-frame p, 
+            .super-button {
+                font-size: 1rem;
+            }
+    
+            .message-box {
+                font-size: 1rem;
+            }
+    
+            .super-footer {
+                font-size: 2rem;
+            }
+        }
+		.video-container {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			gap: 20px;
+			padding: 20px;
+			margin: 30px 0;
+		}
+
+		.video-slot {
+			position: relative;
+			border-radius: 15px;
+			overflow: hidden;
+			box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 
+						0 0 20px rgba(230, 184, 0, 0.3);
+			transition: all 0.3s ease;
+			border: 5px solid #cc0000;
+			background: rgba(255, 255, 255, 0.1);
+		}
+
+		.video-slot:hover {
+			transform: translateY(-5px);
+			border-color: #e6b800;
+			box-shadow: 0 15px 40px rgba(230, 184, 0, 0.4),
+						0 0 30px rgba(204, 0, 0, 0.3);
+		}
+
+		.video-slot video {
+			width: 100%;
+			display: block;
+			border-radius: 10px;
+		}
+
+		.video-slot.special {
+			grid-column: 1 / -1;
+			max-width: 800px;
+			margin: 0 auto;
+		}
+
+		/* Responsive adjustments */
+		@media (max-width: 768px) {
+			.video-container {
+				grid-template-columns: 1fr;
+				gap: 15px;
+				padding: 15px;
+			}
+			
+			.video-slot {
+				margin-bottom: 15px;
+			}
+		}
+
+		/* Video controls styling */
+		video::-webkit-media-controls-panel {
+			background: rgba(10, 31, 68, 0.7);
+		}
+
+		video::-webkit-media-controls-play-button {
+			background-color: #e6b800;
+			border-radius: 50%;
+		}
+
+		video::-webkit-media-controls-timeline {
+			background-color: rgba(230, 184, 0, 0.3);
+			border-radius: 10px;
+		}
+    </style>
+</head>
+<body>
+    <div class="lightning-container" id="lightning"></div>
+    <div class="comic-burst" id="burst"></div>
+    <div class="container">
+        <div class="header">
+            <h1>SUPERHERO HUY<br>HAPPY BIRTHDAY!!!<br>⚡ 💪</h1>
+            <div style="font-size: 2.5em; text-shadow: 0 0 10px rgba(230, 184, 0, 0.5);">
+                ⚡ 🦸‍♂️ 🌟 🦸‍♂️ ⚡
+            </div>
+        </div>
+
+        <div class="message-box">
+			<div class="image-container">
+				<img src="assets/1.png" alt="Hero 1" class="hero-image">
+				<img src="assets/2.png" alt="Hero 2" class="hero-image">
+				<img src="assets/3.png" alt="Hero 3" class="hero-image">
+				<img src="assets/4.png" alt="Hero 4" class="hero-image">
+				<img src="assets/5.png" alt="Hero 5" class="hero-image">
+			</div>
+			<p style="font-size: 1.5em; line-height: 1.8;">
+				Hey Superhero HUY! ⚡<br>
+				Your mission: Find love and conquer the world!<br>
+				Up, up and away! 🦸‍♂️✨
+			</p>
+		</div>
+        <div class="flying-superman">🦸‍♂️</div>
+
+        <div class="super-container">
+            <div class="photo-frame">
+                <img src="assets/lin.jpg" alt="Super Memory 1">
+                <p>Chúc Minh sinh nhật vui vẻ, tiền đầy ví, gái vây quanh và luôn may mắn thành công!<br>- from Lin🦸‍♂️ - ⚡</p>
+            </div>
+            <div class="photo-frame">
+                <img src="assets/thuyanh.jpg" alt="Super Memory 2">
+                <p>Chúc anh Minh thật là dàng tươi. Thi đâu ăn đó, sớm đạt KPI. Sang năm sớm có ngừ eo<br>- from 🦸‍♀️ con - ⚡</p>
+            </div>
+            <div class="photo-frame">
+                <img src="assets/tung.jpg" alt="Super Memory 3">
+                <p>Người thực tế như em chỉ biết chúc anh Minh sớm có tình iu, lương tăng phơi phới thôi nhớ<br>- from tungncn 🦸‍♂️ - ⚡</p>
+            </div>
+            <div class="photo-frame">
+                <img src="assets/hiep.jpg" alt="Super Memory 4">
+                <p>Chúc anh Minh 8386, sớm GIÀU!<br>- from Siêu anh hùng 5 con ⚡⚡⚡⚡⚡ - 💪</p>
+            </div>
+            <div class="photo-frame">
+                <img src="assets/linh.jpg" alt="Super Memory 5">
+                <p>Chúc anh Minh sinh nhật vui vẻ :3<br>- from Lin 🦸‍♀️ - ⚡</p>
+            </div>
+        </div>
+<!-- Add this after the photo-frame section and before the super-button -->
+        <div class="video-container">
+            <!-- Featured video slot (spans full width) -->
+            <div class="video-slot special">
+                <video controls>
+                    <source src="assets/v1.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            
+            <!-- Regular video slots (2 columns) -->
+            <div class="video-slot">
+                <video controls>
+                    <source src="assets/v2.mov" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="video-slot">
+                <video controls>
+                    <source src="assets/v3.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="video-slot">
+                <video controls>
+                    <source src="assets/v4.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="video-slot">
+                <video controls>
+                    <source src="assets/v5.mov" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="video-slot">
+                <video controls>
+                    <source src="assets/v6.mov" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <div class="video-slot">
+                <video controls>
+                    <source src="assets/v7.mov" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+        <button class="super-button" onclick="playBirthdaySong()">PLAY YOUR THEME SONG! 🎵</button>
+
+        <div class="super-footer">
+            CHÚC MỪNG SINH NHẬT<br>
+            ⚡ 🦸‍♂️ 🌟 💪 ⚡
+        </div>
+    </div>
+
+    <script>
+        // Create initial burst effects
+        function createBursts() {
+            const burstContainer = document.getElementById('burst');
+            for (let i = 0; i < 10; i++) {
+                const burst = document.createElement('div');
+                burst.className = 'burst';
+                burst.style.width = Math.random() * 200 + 100 + 'px';
+                burst.style.height = burst.style.width;
+                burst.style.left = Math.random() * 100 + '%';
+                burst.style.top = Math.random() * 100 + '%';
+                burstContainer.appendChild(burst);
+            }
+        }
+
+        function spawnLightning() {
+            const symbols = ['⚡', '💫', '✨', '🌟'];
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const bolt = document.createElement('div');
+                    bolt.className = 'lightning';
+                    bolt.style.left = Math.random() * 100 + 'vw';
+                    bolt.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+                    document.getElementById('lightning').appendChild(bolt);
+                    
+                    setTimeout(() => bolt.remove(), 3000);
+                }, i * 200);
+            }
+        }
+
+        function playBirthdaySong() {
+            const audio = new Audio('assets/happy-birthday-my-kitty-120918
